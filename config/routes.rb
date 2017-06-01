@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'upload_sample/run'
+  
   get 'welcome/index'
 
   root 'welcome#index'
