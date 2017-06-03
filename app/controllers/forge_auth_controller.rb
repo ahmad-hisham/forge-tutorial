@@ -22,7 +22,6 @@ class ForgeAuthController < ApplicationController
     session[:user_refresh_token] = refresh_token
   
     # Redirect to next page
-    #redirect_to forge_data_hubs_path
-    @result = "access_token: #{access_token} || refresh_token: #{refresh_token}"
+    redirect_to forge_data_hubs_path
   end
 end
