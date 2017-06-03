@@ -3,9 +3,6 @@ require 'uri'
 class ForgeAuth
 
   API_URL = 'https://developer.api.autodesk.com'
-  BUCKET_KEY = "forge-rails-tutorial-app-#{Rails.application.secrets.FORGE_CLIENT_ID.downcase}"
-  FILE_NAME = 'elephant.obj' 
-  FILE_PATH = "#{Rails.public_path}/#{FILE_NAME}" 
 
   def initialize()
   end
