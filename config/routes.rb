@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  get 'forge_auth/callback'
+
+  get 'forge_auth/login'
+
   get 'upload_sample/run'
   
   get 'welcome/index'
