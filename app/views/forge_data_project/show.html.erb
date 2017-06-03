@@ -1,0 +1,10 @@
+<h1>Browse Forge Hub <%= @project.name %></h1>
+
+<ul>
+  <li>id: <%= @project.id %></li>
+  <li>name: <%= @project.name %></li>
+  <li>type: <%= @project.type %></li>
+  <li>hub_id: <%= @project.hub_id %></li>
+</ul>
+
+<%= link_to 'Back to Projects', forge_data_projects_path(@project.hub_id) %></td>
