@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>id</th>
+    <!-- <th>id</th> -->
     <th>name</th>
     <th>type</th>
     <th colspan="2"></th>
@@ -10,12 +10,12 @@
 
   <% @hubs.each do |hub| %>
     <tr>
-      <td><%= hub.id %></td>
+      <!-- <td><%= hub.id %></td> -->
       <td><%= hub.name %></td>
       <td><%= hub.type %></td>
 
-      <td><%= link_to 'Show Details', forge_data_hub_show_path(hub.id) %></td>
-      <td><%= link_to 'Show Projects', forge_data_projects_path(hub.id) %></td>
+      <td><%= link_to 'Properties', forge_data_hub_show_path(hub.id) %> | </td>
+      <td><%= link_to 'Browse Projects', forge_data_projects_path(hub.id) %></td>
     </tr>
   <% end %>
 </table>

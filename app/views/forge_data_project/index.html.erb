@@ -2,22 +2,24 @@
 
 <table>
   <tr>
-    <th>id</th>
+    <!-- <th>id</th> -->
     <th>name</th>
     <th>type</th>
-    <th>hub_id</th>
+    <!-- <th>hub_id</th> -->
+    <!-- <th>root_folder_urn</th> -->
     <th colspan="2"></th>
   </tr>
 
   <% @projects.each do |project| %>
     <tr>
-      <td><%= project.id %></td>
+      <!-- <td><%= project.id %></td> -->
       <td><%= project.name %></td>
       <td><%= project.type %></td>
-      <td><%= project.hub_id %></td>
+      <!-- <td><%= project.hub_id %></td> -->
+      <!-- <td><%= project.root_folder_urn %></td> -->
 
-      <td><%= link_to 'Show Details', forge_data_project_show_path(project.hub_id, project.id) %></td>
-      <td><!-- %= link_to 'Show Folders', forge_data_folder_index_path(project.root_folder_urn) % --></td>
+      <td><%= link_to 'Properties', forge_data_project_show_path(project.hub_id, project.id) %> | </td>
+      <td><!-- %= link_to 'Browse Folders', forge_data_folders_path(project.id, project.root_folder_urn) % --></td>
     </tr>
   <% end %>
 </table>
