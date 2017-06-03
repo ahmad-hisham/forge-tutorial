@@ -1,5 +1,3 @@
-require 'uri'
-
 class ForgeDataProject
   include ActiveModel::Model
 
@@ -34,6 +32,6 @@ class ForgeDataProject
     projects = self.get_projects(access_token, hub_id)
 
     # Get Project by id
-    @hub = projects.find {|project| project.id == project_id }
+    projects.find {|project| project.id == project_id }
   end
 end

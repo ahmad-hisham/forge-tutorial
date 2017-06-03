@@ -1,5 +1,3 @@
-require 'uri'
-
 class ForgeDataHub
   include ActiveModel::Model
 
@@ -28,6 +26,6 @@ class ForgeDataHub
     hubs = self.get_hubs(access_token)
 
     # Get Hub by id
-    @hub = hubs.find {|hub| hub.id == hub_id }
+    hubs.find {|hub| hub.id == hub_id }
   end
 end
