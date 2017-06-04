@@ -1,8 +1,18 @@
 # Autodesk Forge Samples (Ruby on Rails)
 
+[![Ruby](https://img.shields.io/badge/ruby-2.3.0-blue.svg)](https://nodejs.org/)
+[![Rails](https://img.shields.io/badge/rails-5.1.1-blue.svg)](https://www.npmjs.com/)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)
+
+[![oAuth2](https://img.shields.io/badge/oAuth2-v1-green.svg)](http://developer.autodesk.com/)
+[![Data-Management](https://img.shields.io/badge/Data%20Management-v1-green.svg)](http://developer.autodesk.com/)
+[![OSS](https://img.shields.io/badge/OSS-v2-green.svg)](http://developer.autodesk.com/)
+[![Model-Derivative](https://img.shields.io/badge/Model%20Derivative-v2-green.svg)](http://developer.autodesk.com/)
+
 ## Overview
 This app provides multiple samples on using the Autodesk Forge Web Services APIs:
 
+### Sample 1
 The first sample demonstrates how to use the [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/), [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/) and [Model Derivative](https://developer.autodesk.com/en/docs/model-derivative/v2/overview/) Forge APIs, as well as the Forge [Viewer](https://developer.autodesk.com/en/docs/viewer/v2/overview/) JavaScript library. It shows the following typical workflow:
 
 * Create a 2-legged authentication token
@@ -13,8 +23,17 @@ The first sample demonstrates how to use the [OAuth](https://developer.autodesk.
 
 It is based on the [forge-ruby-sample-app](https://github.com/Autodesk-Forge/forge-ruby-sample-app) but runs as a Rails App
 
+### Sample 2
+The second sample focuses on 3-legged [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/) authentication and [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/). It:
+
+* Generate 3-legged authentication token from user authorization
+* Explore user hubs from different Autodesk services
+  (BIM 360 Team hub, a Fusion Team hub, an A360 Personal hub or a BIM 360 Docs account)
+* Display all projects in a selected hub
+* Display all elements (folders/files) inside a project with their properties and links
+
 ### Requirements
-Ruby version 2.3.0 and above.
+The app is based on Rails 5.1.1 and Ruby 2.3.0, no compatability checks have been made on earlier releases.
 
 ### Installation
 ```$ bundle install ```
@@ -28,7 +47,11 @@ Ruby version 2.3.0 and above.
 Open the *config/secrets.yml* file, and replace `FORGE_CLIENT_ID` and `FORGE_CLIENT_SECRET` with the client ID and client secret generated when creating the app or create 2 environment variables with the same name.
 
 ```export FORGE_CLIENT_ID=abcd... ```
+
 ```export FORGE_CLIENT_SECRET=efgh... ```
 
 ### Run the App
 ```$ rails server ```
+
+### Deploy on Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ahmad-hisham/forge-tutorial)
