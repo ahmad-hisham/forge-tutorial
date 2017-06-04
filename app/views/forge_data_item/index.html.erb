@@ -1,0 +1,44 @@
+<h1>Browse Forge Folders and Files</h1>
+
+<table>
+  <tr>
+    <!-- <th>id</th> -->
+    <th>name</th>
+    <th>type</th>
+    <!-- <th>project_id</th> -->
+    <td>create_time</td>
+    <!-- <td>create_user_id</td> -->
+    <td>create_user_name</td>
+    <td>last_modified_time</td>
+    <!-- <td>last_modified_user_id</td> -->
+    <td>last_modified_user_name</td>
+    <td>object_count</td>
+    <td>hidden</td>
+    <!-- :self_link, :contents_link, :tip_link, :parent_link -->
+    <th colspan="2"></th>
+  </tr>
+
+  <% @items.each do |item| %>
+    <tr>
+      <!-- <td><%= item.id %></td> -->
+      <td><%= item.name %></td>
+      <td><%= item.type %></td>
+      <!-- <td><%= item.project_id %></td> -->
+      <td><%= item.create_time %></td>
+      <!-- <td><%= item.create_user_id %></td> -->
+      <td><%= item.create_user_name %></td>
+      <td><%= item.last_modified_time %></td>
+      <!-- <td><%= item.last_modified_user_id %></td> -->
+      <td><%= item.last_modified_user_name %></td>
+      <td><%= item.object_count %></td>
+      <td><%= item.hidden %></td>
+
+      <% if item.type == "folders" %>
+        <td><%= link_to 'Properties', forge_data_folder_show_path(item.project_id, item.id) %> | </td>
+        <td><%= link_to 'Browse', forge_data_items_path(item.project_id, item.id) %></td>
+      <% else %>
+        <td colspan="2"><%= link_to 'Properties', forge_data_item_show_path(item.project_id, item.id) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

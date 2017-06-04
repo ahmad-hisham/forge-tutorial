@@ -19,7 +19,7 @@
       <!-- <td><%= project.root_folder_urn %></td> -->
 
       <td><%= link_to 'Properties', forge_data_project_show_path(project.hub_id, project.id) %> | </td>
-      <td><!-- %= link_to 'Browse Folders', forge_data_folders_path(project.id, project.root_folder_urn) % --></td>
+      <td><%= link_to 'Browse Folders', forge_data_items_path(project.id, project.root_folder_urn) %></td>
     </tr>
   <% end %>
 </table>
