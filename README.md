@@ -27,8 +27,8 @@ Ruby version 2.3.0 and above.
 
 Open the *config/secrets.yml* file, and replace `FORGE_CLIENT_ID` and `FORGE_CLIENT_SECRET` with the client ID and client secret generated when creating the app or create 2 environment variables with the same name.
 
-```export FORGE_CLIENT_ID=abcd...
-export FORGE_CLIENT_SECRET=efgh...```
+```export FORGE_CLIENT_ID=abcd... ```
+```export FORGE_CLIENT_SECRET=efgh... ```
 
 ### Run the App
 ```$ rails server ```

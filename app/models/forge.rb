@@ -97,22 +97,15 @@ class Forge
   def translate_to_svf(object_id, access_token)
     base_64_urn = Base64.strict_encode64(object_id)
     response = RestClient.post("#{API_URL}/modelderivative/v2/designdata/job",
-                               {
-                                   input: {
-                                       urn: base_64_urn
-                                   },
-                                   output: {
-                                       formats: [
-                                           {
-                                               type: "svf",
-                                               views: [
-                                                   "3d"
-                                               ]
-                                           }
-                                       ]
-                                   }
-                               }.to_json,
-                               { Authorization: "Bearer #{access_token}", content_type:'application/json' })
+                                {
+                                  input: { urn: base_64_urn },
+                                  output: {
+                                    formats: [
+                                      { type: "svf", views: [ "3d" ] }
+                                    ]
+                                  }
+                                }.to_json,
+                                { Authorization: "Bearer #{access_token}", content_type:'application/json' })
     return response
   end
   
