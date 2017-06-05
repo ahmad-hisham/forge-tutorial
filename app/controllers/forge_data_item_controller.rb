@@ -19,9 +19,9 @@ class ForgeDataItemController < ApplicationController
 
   def show_item
     # Restore from session
-    access_token = session[:user_access_token]
+    @access_token = session[:user_access_token]
 
     # Get item by id
-    @item = ForgeDataItem.get_item(access_token, params[:project_id], params[:item_id])
+    @item = ForgeDataItem.get_item(@access_token, params[:project_id], params[:item_id])
   end
 end

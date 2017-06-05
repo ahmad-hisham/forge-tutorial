@@ -1,5 +1,13 @@
 <h1>Browse Forge Item <%= @item.name %></h1>
 
+<script>
+  var access_token      = '<%=  @access_token %>';
+  var content_link      = '<%=  @item.content_link %>';
+  var content_mime_type = '<%= @item.mime_type %>';
+  var content_file_name = '<%= @item.name %>';
+  var content_thumbnail = '<%= @item.thumbnails_link %>';
+</script>
+
 <ul>
   <li>id: <%= @item.id %></li>
   <li>name: <%= @item.name %></li>
@@ -18,9 +26,14 @@
   <li>version_number: <%= @item.version_number %></li>
   <li>mime_type: <%= @item.mime_type %></li>
   <li>file_type: <%= @item.file_type %></li>
-  <li>storage_size: <%= @item.storage_size %></li>
-  <li>derivatives_link: <%= @item.derivatives_link %></li>
-  <li>thumbnails_link: <%= @item.thumbnails_link %></li>
-  <li>content_link: <%= @item.content_link %></li>
+  <li>storage_size: <%= number_to_human_size @item.storage_size %></li>
+  <!-- <li>derivatives_link: <%= @item.derivatives_link %></li> -->
+  <!-- <li>thumbnails_link: <%= @item.thumbnails_link %></li> -->
+  <!-- <li>content_link: <%= @item.content_link %></li> -->
 
 </ul>
+
+<div><img data-thumbnail/><div/>
+
+<div><a href="#" data-download-content>Download</a></div>
+
