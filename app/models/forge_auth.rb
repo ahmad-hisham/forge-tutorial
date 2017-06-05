@@ -2,11 +2,6 @@ require 'uri'
 
 class ForgeAuth
 
-  API_URL = 'https://developer.api.autodesk.com'
-
-  def initialize()
-  end
-
   def prepare_login_url(callback_url)
     encoded_uri = URI.parse(callback_url)
     "#{API_URL}/authentication/v1/authorize?response_type=code&client_id=#{Rails.application.secrets.FORGE_CLIENT_ID}&redirect_uri=#{encoded_uri}&scope=data:read"

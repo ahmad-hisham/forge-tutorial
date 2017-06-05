@@ -8,8 +8,6 @@ class ForgeDataItem
                 :name_internal, :version_number, :mime_type, :file_type, :storage_size,# item_only_attr
                 :derivatives_link, :thumbnails_link, :content_link
 
-  API_URL = 'https://developer.api.autodesk.com'
-
   def self.get_items(access_token, project_id, folder_id)
     response = RestClient.get("#{API_URL}/data/v1/projects/#{project_id}/folders/#{folder_id}/contents",
                               { Authorization: "Bearer #{access_token}"} )

@@ -3,8 +3,6 @@ class ForgeDataProject
 
   attr_accessor :id, :name, :type, :hub_id, :self_link, :root_folder_urn, :top_folders_link
 
-  API_URL = 'https://developer.api.autodesk.com'
-
   def self.get_projects(access_token, hub_id)
     response = RestClient.get("#{API_URL}/project/v1/hubs/#{hub_id}/projects",
                               { Authorization: "Bearer #{access_token}"} )
