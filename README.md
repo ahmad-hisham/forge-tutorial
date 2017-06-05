@@ -44,7 +44,7 @@ The app is based on Rails 5.1.1 and Ruby 2.3.0, no compatability checks have bee
 
 ### Configure the Parameters
 
-Open the *config/secrets.yml* file, and replace `FORGE_CLIENT_ID` and `FORGE_CLIENT_SECRET` with the client ID and client secret generated when creating the app or create 2 environment variables with the same name.
+Open the *config/secrets.yml* file, and replace `FORGE_CLIENT_ID` and `FORGE_CLIENT_SECRET` with the client ID and client secret generated when creating the app, or create 2 environment variables with the same name.
 
 ```export FORGE_CLIENT_ID=abcd... ```
 
@@ -54,4 +54,7 @@ Open the *config/secrets.yml* file, and replace `FORGE_CLIENT_ID` and `FORGE_CLI
 ```$ rails server ```
 
 ### Deploy on Heroku
+To deploy this application to Heroku, the Callback URL & redirect_uri must use your .herokuapp.com address. After clicking on the button below, at the Heroku Create New App page, set FORGE_CLIENT_ID and FORGE_CLIENT_SECRET config vars.
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ahmad-hisham/forge-tutorial)
+
