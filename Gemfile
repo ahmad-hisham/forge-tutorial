@@ -37,9 +37,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 ### AH: Additional gems
+# RESTClient to issue HTTP requests
 gem 'rest-client'
-
+#jQuery for JavaScript
 gem 'jquery-rails'
+#Bootstrap UI framework
+gem 'bootstrap-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
