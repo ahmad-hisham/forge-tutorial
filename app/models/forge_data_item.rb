@@ -150,10 +150,10 @@ class ForgeDataItem
       name_internal:            json_item["attributes"]["name"],
       type:                     json_item["type"], # "folders" or "items"
       project_id:               project_id,
-      create_time:              json_item["attributes"]["createTime"],
+      create_time:              json_item["attributes"]["createTime"].to_datetime,
       create_user_id:           json_item["attributes"]["createUserId"],
       create_user_name:         json_item["attributes"]["createUserName"],
-      last_modified_time:       json_item["attributes"]["lastModifiedTime"],
+      last_modified_time:       json_item["attributes"]["lastModifiedTime"].to_datetime,
       last_modified_user_id:    json_item["attributes"]["lastModifiedUserId"],
       last_modified_user_name:  json_item["attributes"]["lastModifiedUserName"],
       object_count:             json_item["attributes"]["objectCount"],

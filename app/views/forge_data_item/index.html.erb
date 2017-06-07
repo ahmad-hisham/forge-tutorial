@@ -48,10 +48,10 @@
       </td>
       <td><%= item.type %></td>
       <!-- <td><%= item.project_id %></td> -->
-      <td><%= item.create_time %></td>
+      <td><%= item.create_time.strftime("%F")  %></td>
       <!-- <td><%= item.create_user_id %></td> -->
       <td><%= item.create_user_name %></td>
-      <td><%= item.last_modified_time %></td>
+      <td><%= item.last_modified_time.strftime("%F") %></td>
       <!-- <td><%= item.last_modified_user_id %></td> -->
       <td><%= item.last_modified_user_name %></td>
       <td><%= item.object_count %></td>
