@@ -1,25 +1,28 @@
 <h1>Browse Forge Projects</h1>
 
-<table>
+<table class="table">
   <tr>
     <!-- <th>id</th> -->
     <th>name</th>
     <th>type</th>
     <!-- <th>hub_id</th> -->
     <!-- <th>root_folder_urn</th> -->
-    <th colspan="2"></th>
+    <th></th>
   </tr>
 
   <% @projects.each do |project| %>
     <tr>
       <!-- <td><%= project.id %></td> -->
-      <td><%= project.name %></td>
+      <td>
+        <span class="glyphicon glyphicon-inbox"></span>
+        <%= project.name %>
+      </td>
       <td><%= project.type %></td>
       <!-- <td><%= project.hub_id %></td> -->
       <!-- <td><%= project.root_folder_urn %></td> -->
 
-      <td><%= link_to 'Properties', forge_data_project_show_path(project.hub_id, project.id) %> | </td>
-      <td><%= link_to 'Browse Folders', forge_data_items_path(project.id, project.root_folder_urn) %></td>
+      <td><%= link_to 'Properties', forge_data_project_show_path(project.hub_id, project.id) %>
+       |  <%= link_to 'Browse Folders', forge_data_items_path(project.id, project.root_folder_urn) %></td>
     </tr>
   <% end %>
 </table>

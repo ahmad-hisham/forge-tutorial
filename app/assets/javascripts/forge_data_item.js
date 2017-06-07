@@ -1,8 +1,9 @@
 /*global $*/
 var access_token,content_link,content_mime_type,content_file_name,content_thumbnail;
 
-//$(document).ready(function() {
 $(document).on('turbolinks:load', function() {
+//$(document).ready(function() {
+
   //--- Handle download button
   if (content_link != "")
     $("a[data-download-content]").click(downloadContent);  // or .bind("click", function(e){

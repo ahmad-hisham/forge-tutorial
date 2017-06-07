@@ -17,7 +17,7 @@
   <%= content_tag :div, msg, class: name %>
 <% end -%>
 
-<table>
+<table class="table">
   <tr>
     <!-- <th>id</th> -->
     <th>name</th>
@@ -32,13 +32,20 @@
     <td>object_count</td>
     <td>hidden</td>
     <!-- :self_link, :contents_link, :tip_link, :parent_link -->
-    <th colspan="2"></th>
+    <th></th>
   </tr>
 
   <% @items.each do |item| %>
     <tr>
       <!-- <td><%= item.id %></td> -->
-      <td><%= item.name %></td>
+      <td>
+        <% if item.type == "folders" %>
+          <span class="glyphicon glyphicon-folder-open"></span>
+        <% else %>
+          <span class="glyphicon glyphicon-file"></span>
+        <% end %>
+        <%= item.name %>
+      </td>
       <td><%= item.type %></td>
       <!-- <td><%= item.project_id %></td> -->
       <td><%= item.create_time %></td>
@@ -51,10 +58,10 @@
       <td><%= item.hidden %></td>
 
       <% if item.type == "folders" %>
-        <td><%= link_to 'Properties', forge_data_folder_show_path(item.project_id, item.id) %> | </td>
-        <td><%= link_to 'Browse', forge_data_items_path(item.project_id, item.id) %></td>
+        <td><%= link_to 'Properties', forge_data_folder_show_path(item.project_id, item.id) %>
+         |  <%= link_to 'Browse', forge_data_items_path(item.project_id, item.id) %></td>
       <% else %>
-        <td colspan="2"><%= link_to 'Properties', forge_data_item_show_path(item.project_id, item.id) %></td>
+        <td><%= link_to 'Properties', forge_data_item_show_path(item.project_id, item.id) %></td>
       <% end %>
     </tr>
   <% end %>
