@@ -1,5 +1,22 @@
 <h1>Browse Forge Folders and Files</h1>
 
+<!-- Back -->
+<div>
+  <%= link_to 'Back', :back %>
+  
+  <a href="#" data-show-upload-form>Upload new file</a>
+  <span class="upload-form">
+  <%= form_tag({action: :upload}, multipart: true) do %>
+    <%= file_field_tag 'uploaded_file' %>
+    <%= submit_tag("Upload") %>
+  <% end %>
+  </span>
+</div>
+
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
+
 <table>
   <tr>
     <!-- <th>id</th> -->

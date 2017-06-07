@@ -1,15 +1,20 @@
 /*global $*/
 var access_token,content_link,content_mime_type,content_file_name,content_thumbnail;
 
-$(document).ready(function() {
+//$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
+  //--- Handle download button
   if (content_link != "")
-    //--- Handle download download button
     $("a[data-download-content]").click(downloadContent);  // or .bind("click", function(e){
   else
     $("a[data-download-content]").hide();
 
-  if (content_thumbnail != "")
-    //--- Show thumbnail in image
+  //--- Handle show upload form link
+  $(".upload-form").hide();
+  $("a[data-show-upload-form]").click(showUploadForm);
+
+  //--- Show thumbnail in image
+  if (content_thumbnail != null && content_thumbnail != "")
     showThumbnail();
 });
 
@@ -55,6 +60,11 @@ function saveBlobAs (name, type, data) {
   a[0].click();
   window.URL.revokeObjectURL(url);
   a.remove();
+}
+
+function showUploadForm(e) {
+  e.preventDefault();
+  $(".upload-form").toggle();
 }
 
 function showThumbnail () {

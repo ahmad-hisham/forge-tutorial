@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  post '/forge/projects/:project_id/folders/:folder_id/upload',  to: 'forge_data_item#upload',      as: 'forge_data_item_upload', constraints: {project_id: /.*/ , folder_id: /.*/ }
+
   get '/forge/projects/:project_id/folders/:folder_id/contents', to: 'forge_data_item#index',       as: 'forge_data_items', constraints: {project_id: /.*/ , folder_id: /.*/ }
   get '/forge/projects/:project_id/folders/:folder_id',          to: 'forge_data_item#show_folder', as: 'forge_data_folder_show', constraints: {project_id: /.*/ , folder_id: /.*/ }
   get '/forge/projects/:project_id/items/:item_id',              to: 'forge_data_item#show_item',   as: 'forge_data_item_show', constraints: { project_id: /.*/ , item_id: /.*/ }
