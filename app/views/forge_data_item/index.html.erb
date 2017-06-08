@@ -41,10 +41,11 @@
       <td>
         <% if item.type == "folders" %>
           <span class="glyphicon glyphicon-folder-open"></span>
+          <%= link_to item.name, forge_data_items_path(item.project_id, item.id) %>
         <% else %>
           <span class="glyphicon glyphicon-file"></span>
+          <%= item.name %>
         <% end %>
-        <%= item.name %>
       </td>
       <td><%= item.type %></td>
       <!-- <td><%= item.project_id %></td> -->
@@ -59,7 +60,7 @@
 
       <% if item.type == "folders" %>
         <td><%= link_to 'Properties', forge_data_folder_show_path(item.project_id, item.id) %>
-         |  <%= link_to 'Browse', forge_data_items_path(item.project_id, item.id) %></td>
+        </td>
       <% else %>
         <td><%= link_to 'Properties', forge_data_item_show_path(item.project_id, item.id) %></td>
       <% end %>

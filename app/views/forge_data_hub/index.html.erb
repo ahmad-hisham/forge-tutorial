@@ -13,12 +13,12 @@
       <!-- <td><%= hub.id %></td> -->
       <td>
         <span class="glyphicon glyphicon-globe"></span>
-        <%= hub.name %>
+        <%= link_to hub.name, forge_data_projects_path(hub.id) %>
       </td>
       <td><%= hub.type %></td>
 
       <td><%= link_to 'Properties', forge_data_hub_show_path(hub.id) %>
-       |  <%= link_to 'Browse Projects', forge_data_projects_path(hub.id) %></td>
+      </td>
     </tr>
   <% end %>
 </table>

@@ -15,14 +15,14 @@
       <!-- <td><%= project.id %></td> -->
       <td>
         <span class="glyphicon glyphicon-inbox"></span>
-        <%= project.name %>
+        <%= link_to project.name, forge_data_items_path(project.id, project.root_folder_urn) %>
       </td>
       <td><%= project.type %></td>
       <!-- <td><%= project.hub_id %></td> -->
       <!-- <td><%= project.root_folder_urn %></td> -->
 
       <td><%= link_to 'Properties', forge_data_project_show_path(project.hub_id, project.id) %>
-       |  <%= link_to 'Browse Folders', forge_data_items_path(project.id, project.root_folder_urn) %></td>
+      </td>
     </tr>
   <% end %>
 </table>
