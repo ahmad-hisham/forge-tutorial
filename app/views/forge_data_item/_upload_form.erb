@@ -1,0 +1,6 @@
+<span class="upload-form">
+<%= form_tag({action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'uploaded_file' %>
+  <%= submit_tag("Upload") %>
+<% end %>
+</span>

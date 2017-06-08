@@ -1,20 +1,23 @@
 <h1>Browse Forge Folders and Files</h1>
 
-<!-- Back -->
-<div>
-  <%= link_to 'Back', :back %>
-  
-  <a href="#" data-show-upload-form>Upload new file</a>
-  <span class="upload-form">
-  <%= form_tag({action: :upload}, multipart: true) do %>
-    <%= file_field_tag 'uploaded_file' %>
-    <%= submit_tag("Upload") %>
-  <% end %>
-  </span>
+<div class="btn-group" role="group" id="toolbar-container">
+  <%= link_to :back, class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-level-up"></span>
+    Back
+  <% end %>  
+  <a type="button" class="btn btn-default" href="#" data-show-upload-form>
+    <span class="glyphicon glyphicon-open-file"></span>
+    Upload new file
+  </a>
 </div>
 
+<%= render partial: "upload_form" %>
+
 <% flash.each do |name, msg| -%>
-  <%= content_tag :div, msg, class: name %>
+  <div class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+    <%= msg %>
+  </div>
 <% end -%>
 
 <table class="table">
