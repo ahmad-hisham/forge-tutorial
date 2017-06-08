@@ -5,14 +5,10 @@ $(document).on('turbolinks:load', function() {
 //$(document).ready(function() {
 
   //--- Handle download button
-  if (content_link != "")
+  if (content_link != null && content_link != "")
     $("a[data-download-content]").click(downloadContent);  // or .bind("click", function(e){
   else
     $("a[data-download-content]").hide();
-
-  //--- Handle show upload form link
-  $(".upload-form").hide();
-  $("a[data-show-upload-form]").click(showUploadForm);
 
   //--- Show thumbnail in image
   if (content_thumbnail != null && content_thumbnail != "")
@@ -61,11 +57,6 @@ function saveBlobAs (name, type, data) {
   a[0].click();
   window.URL.revokeObjectURL(url);
   a.remove();
-}
-
-function showUploadForm(e) {
-  e.preventDefault();
-  $(".upload-form").toggle();
 }
 
 function showThumbnail () {
