@@ -8,6 +8,8 @@
   var content_thumbnail = '<%= @item.thumbnails_link %>';
 </script>
 
+<%= render partial: "flash_info" %>
+
 <ul>
   <li>id: <%= @item.id %></li>
   <li>name: <%= @item.name %></li>
@@ -30,6 +32,7 @@
   <!-- <li>derivatives_link: <%= @item.derivatives_link %></li> -->
   <!-- <li>thumbnails_link: <%= @item.thumbnails_link %></li> -->
   <!-- <li>content_link: <%= @item.content_link %></li> -->
+  <!-- <li>content_urn: <%= @item.content_link %></li> -->
 
 </ul>
 

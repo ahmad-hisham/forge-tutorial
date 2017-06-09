@@ -24,7 +24,8 @@ class ForgeDataItemController < ApplicationController
     # Get item by id
     @item = ForgeDataItem.get_item(@access_token, params[:project_id], params[:item_id])
   end
-  
+
+
   def upload
     # Restore from session
     access_token = session[:user_access_token]

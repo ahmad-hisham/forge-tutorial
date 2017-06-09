@@ -6,7 +6,7 @@ class ForgeDataItem
                 :last_modified_time, :last_modified_user_id, :last_modified_user_name,
                 :object_count, :hidden, :self_link, :parent_link,
                 :name_internal, :version_number, :mime_type, :file_type, :storage_size,# item_only_attr
-                :derivatives_link, :thumbnails_link, :content_link
+                :derivatives_link, :thumbnails_link, :content_link, :content_urn
 
   def self.get_items(access_token, project_id, folder_id)
     response = RestClient.get("#{API_URL}/data/v1/projects/#{project_id}/folders/#{folder_id}/contents",
@@ -174,8 +174,8 @@ class ForgeDataItem
     item.storage_size =     json_included["attributes"]["storageSize"]
     item.derivatives_link = json_included["relationships"]["derivatives"]["meta"]["link"]["href"] unless json_included["relationships"]["derivatives"].nil?
     item.thumbnails_link =  json_included["relationships"]["thumbnails"]["meta"]["link"]["href"] unless json_included["relationships"]["thumbnails"].nil?
-    item.content_link  =    json_included["relationships"]["storage"]["meta"]["link"]["href"] unless json_included["relationships"]["storage"].nil?
-    # or included.relationships.storage.data.id
+    item.content_link =     json_included["relationships"]["storage"]["meta"]["link"]["href"] unless json_included["relationships"]["storage"].nil?
+    item.content_urn =      json_included["relationships"]["storage"]["data"]["id"] unless json_included["relationships"]["storage"].nil?
     item
   end
 end
