@@ -43,5 +43,9 @@
     <span class="glyphicon glyphicon-save-file"></span>
     Download
   </a>
+  <%= link_to forge_derivative_translate_path(@item.project_id, @item.id), class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-transfer"></span>
+    Translate
+  <% end %>  
 </div>
 
