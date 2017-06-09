@@ -6,8 +6,7 @@ class ForgeDerivative
   # Translate previously uploaded file to SVF format
   def self.translate_item(access_token, project_id, item_id)
     item = ForgeDataItem.get_item(access_token, project_id, item_id)
-    object_id = item.content_urn
-    base_64_urn = Base64.strict_encode64(object_id)
+    base_64_urn = Base64.strict_encode64(item.content_urn)
 
     json_payload = %{
       {
@@ -34,8 +33,7 @@ class ForgeDerivative
   # Poll the status of the job until it's done
   def self.verify_job_complete(access_token, project_id, item_id)
     item = ForgeDataItem.get_item(access_token, project_id, item_id)
-    object_id = item.content_urn
-    base_64_urn = Base64.strict_encode64(object_id)
+    base_64_urn = Base64.strict_encode64(item.content_urn)
 
     response = RestClient.get("#{API_URL}/modelderivative/v2/designdata/#{base_64_urn}/manifest",
                               { Authorization: "Bearer #{access_token}"} )
