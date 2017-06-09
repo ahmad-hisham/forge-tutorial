@@ -4,14 +4,14 @@ class ForgeAuthController < ApplicationController
   def login
     my_forge_auth = ForgeAuth.new
     # callback_url is created from current base_url and the callback action path
-    callback_url = request.base_url + forge_auth_callback_path
+    callback_url = request.base_url + forge_login_callback_path
     @login_url = my_forge_auth.prepare_login_url(callback_url)
   end
 
   # Receive successful login details and save access_token 
   def callback
     callback_code = params[:code]
-    callback_url = request.base_url + forge_auth_callback_path 
+    callback_url = request.base_url + forge_login_callback_path 
     
     # Get access_token & refresh_token from oauth_code received from url params
     my_forge_auth = ForgeAuth.new
