@@ -3,7 +3,7 @@ require 'json'
 require 'base64'
 require 'open-uri'
 
-class Forge
+class ForgeSample
 
   BUCKET_KEY = "forge-rails-tutorial-app-#{Rails.application.secrets.FORGE_CLIENT_ID.downcase}"
   FILE_NAME = 'elephant.obj' 

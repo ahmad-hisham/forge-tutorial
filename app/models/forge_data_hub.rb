@@ -8,15 +8,7 @@ class ForgeDataHub
                               { Authorization: "Bearer #{access_token}"} )
     response_json = JSON.parse(response.body)["data"]
 
-    response_json.map { |hub|
-      ForgeDataHub.new(
-        id: hub["id"],
-        name: hub["attributes"]["name"],
-        type: hub["attributes"]["extension"]["type"],
-        self_link: hub["links"]["self"]["href"],
-        projects_link: hub["relationships"]["projects"]["links"]["related"]["href"]
-      )
-    }
+    response_json.map { |hub| self.from_json(hub) }
   end
   
   def self.get_hub(access_token, hub_id)
@@ -25,5 +17,15 @@ class ForgeDataHub
 
     # Get Hub by id
     hubs.find {|hub| hub.id == hub_id }
+  end
+  
+  def self.from_json(hub)
+    ForgeDataHub.new(
+      id: hub["id"],
+      name: hub["attributes"]["name"],
+      type: hub["attributes"]["extension"]["type"],
+      self_link: hub["links"]["self"]["href"],
+      projects_link: hub["relationships"]["projects"]["links"]["related"]["href"]
+    )
   end
 end

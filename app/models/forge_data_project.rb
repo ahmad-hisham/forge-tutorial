@@ -8,17 +8,7 @@ class ForgeDataProject
                               { Authorization: "Bearer #{access_token}"} )
     response_json = JSON.parse(response.body)["data"]
 
-    response_json.map { |project|
-      ForgeDataProject.new(
-        id: project["id"],
-        name: project["attributes"]["name"],
-        type: project["attributes"]["extension"]["type"],
-        hub_id: hub_id,
-        self_link: project["links"]["self"]["href"],
-        root_folder_urn: project["relationships"]["rootFolder"]["data"]["id"],
-        top_folders_link: project["relationships"]["topFolders"]["links"]["related"]["href"]
-      )
-    }
+    response_json.map { |project| self.from_json(project, hub_id) }
   end
   
   def self.get_project(access_token, hub_id, project_id)
@@ -31,5 +21,17 @@ class ForgeDataProject
 
     # Get Project by id
     projects.find {|project| project.id == project_id }
+  end
+  
+  def self.from_json(project, hub_id)
+    ForgeDataProject.new(
+      id: project["id"],
+      name: project["attributes"]["name"],
+      type: project["attributes"]["extension"]["type"],
+      hub_id: hub_id,
+      self_link: project["links"]["self"]["href"],
+      root_folder_urn: project["relationships"]["rootFolder"]["data"]["id"],
+      top_folders_link: project["relationships"]["topFolders"]["links"]["related"]["href"]
+    )
   end
 end
