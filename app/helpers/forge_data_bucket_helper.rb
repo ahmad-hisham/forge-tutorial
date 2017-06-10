@@ -1,0 +1,2 @@
+module ForgeDataBucketHelper
+end

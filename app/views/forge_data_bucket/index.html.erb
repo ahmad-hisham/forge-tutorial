@@ -1,0 +1,32 @@
+<h1>Browse Forge Buckets</h1>
+
+<div class="btn-group" role="group" id="toolbar-container">
+  <%= link_to :back, class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-level-up"></span>
+    Back
+  <% end %>  
+</div>
+
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>Created date</th>
+    <th>Policy key</th>
+    <th></th>
+  </tr>
+
+  <% @buckets.each do |bucket| %>
+    <tr>
+      <td>
+        <span class="glyphicon glyphicon-inbox"></span>
+        <%= bucket.id %>
+        <%# link_to bucket.id, forge_data_objects_path(bucket.id) %>
+      </td>
+      <td><%= bucket.created_date.strftime("%F") %></td>
+      <td><%= bucket.policy_key %></td>
+
+      <td><%= link_to 'Properties', forge_data_bucket_show_path(bucket.id) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
