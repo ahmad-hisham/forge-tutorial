@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/forge/projects/:project_id/items/:item_id/translate_progress', to: 'forge_derivative#translate_progress', as: 'forge_derivative_translate_progress', defaults: {format: :json}, constraints: { project_id: /.*/ , item_id: /.*/ }
 
   post '/forge/projects/:project_id/folders/:folder_id/upload',  to: 'forge_data_item#upload',      as: 'forge_data_item_upload', constraints: {project_id: /.*/ , folder_id: /.*/ }
+  post  '/forge/projects/:project_id/folders/:folder_id/new',     to: 'forge_data_item#new_folder', as: 'forge_data_item_new', constraints: {project_id: /.*/ , folder_id: /.*/ }
 
   get '/forge/projects/:project_id/folders/:folder_id/contents', to: 'forge_data_item#index',       as: 'forge_data_items', constraints: {project_id: /.*/ , folder_id: /.*/ }
   get '/forge/projects/:project_id/folders/:folder_id',          to: 'forge_data_item#show_folder', as: 'forge_data_folder_show', constraints: {project_id: /.*/ , folder_id: /.*/ }

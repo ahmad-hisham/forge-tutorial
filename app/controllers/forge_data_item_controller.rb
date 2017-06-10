@@ -41,9 +41,22 @@ class ForgeDataItemController < ApplicationController
 
     # Upload file to selected folder
     @item = ForgeDataItem.upload_to_folder(access_token, params[:project_id], params[:folder_id], file_location, file_name)
-    
+
     # Redirect to folder view with new item
-    flash[:notice] = "Item Uploaded Successfully"
+    flash[:info] = "Item Uploaded Successfully"
+    redirect_to @item
+  end
+
+
+  def new_folder
+    # Restore from session
+    access_token = session[:user_access_token]
+
+    # Create new folder in selected folder
+    @item = ForgeDataItem.new_folder(access_token, params[:project_id], params[:folder_id], params[:subfolder_name])
+
+    # Redirect to folder view with new item
+    flash[:info] = "Folder created Successfully"
     redirect_to @item
   end
 end

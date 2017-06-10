@@ -9,9 +9,15 @@
     <span class="glyphicon glyphicon-open-file"></span>
     Upload new file
   </a>
+  <a type="button" class="btn btn-default" href="#" data-toggle="modal" data-target="#modal-new-folder">
+    <span class="glyphicon glyphicon-folder-close"></span>
+    Create folder
+  </a>
 </div>
 
 <%= render partial: "upload_form" %>
+
+<%= render partial: "new_folder_form" %>
 
 <%= render partial: "flash_info" %>
 
@@ -29,7 +35,6 @@
     <th>Last modified by</th>
     <th>Objects count</th>
     <th>Hidden</th>
-    <!-- :self_link, :contents_link, :tip_link, :parent_link -->
     <th></th>
   </tr>
 

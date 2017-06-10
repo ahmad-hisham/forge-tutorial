@@ -34,7 +34,7 @@ class ForgeDataItem
 
   def self.upload_to_folder(access_token, project_id, folder_id, file_location, file_name)
     #--- Prepare a storage location for specified folder/project
-    json_payload_storage = %{
+    json_payload_storage = %(
       {
         "jsonapi": { "version": "1.0" },
         "data": {
@@ -49,7 +49,7 @@ class ForgeDataItem
           }
         }
       }
-    }
+    )
     response = RestClient.post("#{API_URL}/data/v1/projects/#{project_id}/storage",
                                json_payload_storage,
                                {
@@ -80,7 +80,7 @@ class ForgeDataItem
     p "##File uploaded",file_urn
 
     #--- Link uploaded file to versioned item in selected folder/project
-    json_payload_versions = %{
+    json_payload_versions = %(
       {
         "jsonapi": { "version": "1.0" },
         "data": {
@@ -128,7 +128,7 @@ class ForgeDataItem
           }
         ]
       }
-    }
+    )
     p "PAYLOAD:",json_payload_versions
     response_versions = RestClient.post("#{API_URL}/data/v1/projects/#{project_id}/items",
                                         json_payload_versions,
@@ -140,7 +140,49 @@ class ForgeDataItem
 
     response_versions_json = JSON.parse(response_versions.body)
     p "RESPONSE:",response_versions_json
+
     self.from_json_with_item_details(response_versions_json, project_id)
+  end
+
+  def self.new_folder(access_token, project_id, folder_id, subfolder_name)
+    # Call request
+    json_payload = %(
+      {
+        "jsonapi": { "version": "1.0" },
+        "data": {
+          "type": "folders",
+          "attributes": {
+            "name": "#{subfolder_name}",
+            "extension": {
+              "type": "folders:autodesk.core:Folder",
+              "version": "1.0"
+            }
+          },
+          "relationships": {
+            "parent": {
+              "data": {
+                "type": "folders",
+                "id": "#{folder_id}"
+              }
+            }
+          }
+        }
+      }
+    )
+    response = RestClient.post("#{API_URL}/data/v1/projects/#{project_id}/folders",
+                               json_payload,
+                               {
+                                 Authorization: "Bearer #{access_token}",
+                                 content_type:"application/vnd.api+json",
+                                 Accept: "application/vnd.api+json"
+                                })
+
+    # Return newly created folder
+    #response_json = JSON.parse(response.body)["data"]
+    #self.from_json(response_json, project_id)
+
+    # Return parent
+    self.get_folder(access_token, project_id, folder_id)
   end
 
   def self.from_json(json_item, project_id)
