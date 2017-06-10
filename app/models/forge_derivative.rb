@@ -6,12 +6,12 @@ class ForgeDerivative
   # Translate previously uploaded file to SVF format
   def self.translate_item(access_token, project_id, item_id)
     item = ForgeDataItem.get_item(access_token, project_id, item_id)
-    base_64_urn = Base64.strict_encode64(item.content_urn)
+    base64_urn = Base64.strict_encode64(item.content_urn).delete("=")
 
     json_payload = %{
       {
         "input": {
-          "urn": "#{base_64_urn}"
+          "urn": "#{base64_urn}"
         },
         "output": {
           "formats": [
@@ -27,23 +27,16 @@ class ForgeDerivative
     response = RestClient.post("#{API_URL}/modelderivative/v2/designdata/job",
                                json_payload,
                                { Authorization: "Bearer #{access_token}", content_type:'application/json' })
-    JSON.parse(response.body)["result"]
+    JSON.parse(response.body)
   end
   
   # Poll the status of the job until it's done
   def self.verify_job_complete(access_token, project_id, item_id)
     item = ForgeDataItem.get_item(access_token, project_id, item_id)
-    base_64_urn = Base64.strict_encode64(item.content_urn)
+    base64_urn = Base64.strict_encode64(item.content_urn).delete("=")
 
-    response = RestClient.get("#{API_URL}/modelderivative/v2/designdata/#{base_64_urn}/manifest",
+    response = RestClient.get("#{API_URL}/modelderivative/v2/designdata/#{base64_urn}/manifest",
                               { Authorization: "Bearer #{access_token}"} )
-    response_json = JSON.parse(response.body)
-
-    # return hash with status and progress
-    {
-      status: response_json["status"],
-      progress: response_json["progress"]
-    }
+    JSON.parse(response.body)
   end
-
 end

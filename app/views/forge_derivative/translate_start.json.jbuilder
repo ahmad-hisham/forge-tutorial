@@ -1,1 +1,1 @@
-json.result @result #should be success or created
+json.result @result["result"] #should be success or created

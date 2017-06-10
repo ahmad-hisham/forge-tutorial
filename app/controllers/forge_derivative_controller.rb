@@ -12,7 +12,8 @@ class ForgeDerivativeController < ApplicationController
     is_complete = false
     while(!is_complete)
       result = ForgeDerivative.verify_job_complete(access_token, params[:project_id], params[:item_id])
-      case result[:status]
+      p result
+      case result["status"]
       when "pending", "inprogress"
         # "Haven't finished translating file - status: #{result[:status]}, progress: #{result[:progress]}"
         sleep 1
@@ -23,7 +24,7 @@ class ForgeDerivativeController < ApplicationController
     end
 
     # Redirect to item view with message
-    flash[:info] = "Finished translating file - status: #{result[:status]}, progress: #{result[:progress]}"
+    flash[:info] = "Finished translating file - status: #{result["status"]}, progress: #{result["progress"]}"
     redirect_to forge_data_item_show_path(project_id: params[:project_id], item_id: params[:item_id])
   end
 

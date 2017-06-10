@@ -32,7 +32,7 @@ class ForgeSample
       upload_response = upload_file(BUCKET_KEY,FILE_PATH,FILE_NAME,access_token)
       #log += "Response: #{upload_response}\n"
       urn = JSON.parse(upload_response.body)['objectId']
-      log += "URN: #{urn}\n"
+      log += "urn: #{urn}\n"
     
       log += "***** 4. Translate to svf\n"
       translate_job_response = translate_to_svf(urn,access_token)
@@ -40,6 +40,7 @@ class ForgeSample
 
       log += "***** 5. Translate to svf complete\n"
       urn_encoded = JSON.parse(translate_job_response.body)["urn"]
+      log += "urn_encoded: #{urn_encoded}\n"
       verify_response = verify_job_complete(urn_encoded,access_token)
       log += "Response: #{JSON.parse(verify_response.body)["status"]}\n"
 

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   get '/forge/projects/:project_id/items/:item_id/translate',          to: 'forge_derivative#translate',          as: 'forge_derivative_translate', constraints: { project_id: /.*/ , item_id: /.*/ }
-  get '/forge/projects/:project_id/items/:item_id/translate_start',    to: 'forge_derivative#translate_start',    as: 'forge_derivative_translate_start', constraints: { project_id: /.*/ , item_id: /.*/ }
-  get '/forge/projects/:project_id/items/:item_id/translate_progress', to: 'forge_derivative#translate_progress', as: 'forge_derivative_translate_progress', constraints: { project_id: /.*/ , item_id: /.*/ }
+  get '/forge/projects/:project_id/items/:item_id/translate_start',    to: 'forge_derivative#translate_start',    as: 'forge_derivative_translate_start',    defaults: {format: :json}, constraints: { project_id: /.*/ , item_id: /.*/ }
+  get '/forge/projects/:project_id/items/:item_id/translate_progress', to: 'forge_derivative#translate_progress', as: 'forge_derivative_translate_progress', defaults: {format: :json}, constraints: { project_id: /.*/ , item_id: /.*/ }
 
   post '/forge/projects/:project_id/folders/:folder_id/upload',  to: 'forge_data_item#upload',      as: 'forge_data_item_upload', constraints: {project_id: /.*/ , folder_id: /.*/ }
 

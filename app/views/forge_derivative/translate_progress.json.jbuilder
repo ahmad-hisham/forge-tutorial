@@ -1,2 +1,2 @@
-json.status @result[:status]
-json.progress @result[:progress]
+json.status @result["status"]
+json.progress @result["progress"]
