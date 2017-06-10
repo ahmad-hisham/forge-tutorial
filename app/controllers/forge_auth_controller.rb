@@ -22,4 +22,12 @@ class ForgeAuthController < ApplicationController
     # Redirect to next page
     redirect_to forge_data_hubs_path
   end
+
+  def login_app
+    app_access_token = ForgeAuth.get_app_access_token
+    session[:app_access_token] = app_access_token
+  
+    # Redirect to next page
+    redirect_to forge_data_buckets_path
+  end
 end

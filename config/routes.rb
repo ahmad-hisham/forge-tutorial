@@ -23,8 +23,9 @@ Rails.application.routes.draw do
   get '/forge/hubs/', to: 'forge_data_hub#index', as: 'forge_data_hubs'
   get '/forge/hubs/:id', to: 'forge_data_hub#show', as: 'forge_data_hub_show', constraints: { id: /.*/ } # maybe /([^\/]+?)(?=\.json|\.html|$|\/)/
 
-  get '/forge/login/',         to: 'forge_auth#login',    as: 'forge_login'
+  get '/forge/login',          to: 'forge_auth#login',    as: 'forge_login'
   get '/forge/login/callback', to: 'forge_auth#callback', as: 'forge_login_callback'
+  get '/forge/login_app',      to: 'forge_auth#login_app', as: 'forge_login_app'
 
   get 'upload_sample/run'
   
