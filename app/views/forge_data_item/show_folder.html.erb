@@ -14,11 +14,4 @@
   <li>object_count: <%= @item.object_count %></li>
   <li>hidden: <%= @item.hidden %></li>
 </ul>
-
-<div><a href="#" data-show-upload-form>Upload new file</a></div>
-<div class="upload-form">
-<%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'uploaded_file' %>
-  <%= submit_tag("Upload") %>
-<% end %>
 </div>
