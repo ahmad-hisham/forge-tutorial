@@ -10,7 +10,7 @@ class ForgeDataBucket
 
     response_json.map { |bucket| self.from_json(bucket) }
   end
-  
+
   def self.get_bucket(access_token, bucket_id)
     response = RestClient.get("#{API_URL}/oss/v2/buckets?bucketKey=#{bucket_id}",
                               { Authorization: "Bearer #{access_token}"} )
@@ -18,7 +18,29 @@ class ForgeDataBucket
 
     self.from_json(response_json[0])
   end
-  
+
+  def self.new_bucket(access_token, bucket_id)
+    begin
+      json_payload = %(
+        {
+          "bucketKey" : "#{bucket_id}",
+          "policyKey" : "transient"
+        }
+      )
+      response = RestClient.post("#{API_URL}/oss/v2/buckets",
+                                 json_payload,
+                                 { Authorization: "Bearer #{access_token}", content_type:'application/json' })
+      response_json = JSON.parse(response.body)
+      self.from_json(response_json)
+    rescue RestClient::Exception => e
+      p e.response.body
+      if e.response.code == 409
+        then self.get_bucket(access_token, bucket_id)
+        else raise e
+      end
+    end
+  end
+
   def self.from_json(bucket)
     ForgeDataBucket.new(
       id: bucket["bucketKey"],

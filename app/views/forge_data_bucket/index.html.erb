@@ -1,11 +1,13 @@
 <h1>Browse Forge Buckets</h1>
 
 <div class="btn-group" role="group" id="toolbar-container">
-  <%= link_to :back, class: "btn btn-default", type: "button" do %>
-    <span class="glyphicon glyphicon-level-up"></span>
-    Back
-  <% end %>  
+  <a type="button" class="btn btn-default" href="#" data-toggle="modal" data-target="#modal-new-bucket">
+    <span class="glyphicon glyphicon-inbox"></span>
+    Create bucket
+  </a>
 </div>
+
+<%= render partial: "new_bucket_form" %>
 
 <table class="table">
   <tr>

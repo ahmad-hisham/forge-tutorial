@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/forge/buckets/',    to: 'forge_data_bucket#index', as: 'forge_data_buckets'
-  get '/forge/buckets/:id', to: 'forge_data_bucket#show', as: 'forge_data_bucket_show', constraints: { id: /.*/ } # maybe /([^\/]+?)(?=\.json|\.html|$|\/)/
+  get  '/forge/buckets/',    to: 'forge_data_bucket#index', as: 'forge_data_buckets'
+  get  '/forge/buckets/:id', to: 'forge_data_bucket#show',  as: 'forge_data_bucket_show', constraints: { id: /.*/ }
+  post '/forge/buckets/new', to: 'forge_data_bucket#new',   as: 'forge_data_bucket_new'
 
   get '/forge/projects/:project_id/items/:item_id/view', to: 'forge_viewer#view', as: 'forge_viewer_view', constraints: { project_id: /.*/ , item_id: /.*/ }
 
