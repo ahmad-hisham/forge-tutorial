@@ -1,0 +1,43 @@
+<h1>Browse Forge Objects</h1>
+
+<div class="btn-group" role="group" id="toolbar-container">
+  <%= link_to forge_data_buckets_path, class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-level-up"></span>
+    Back
+  <% end %>  
+  <%= link_to forge_data_object_upload_path, class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-open"></span>
+    Upload sample
+  <% end %>  
+</div>
+
+<%= render partial: "flash_info" %>
+
+<table class="table">
+  <tr>
+    <!-- <th>id</th> -->
+    <th>Name</th>
+    <th>Bucket id</th>
+    <th>SHA1</th>
+    <th>Size</th>
+    <!-- <th>Location</th> -->
+    <th></th>
+  </tr>
+
+  <% @objects.each do |object| %>
+    <tr>
+      <!-- <td><%= object.id %></td> -->
+      <td>
+        <span class="glyphicon glyphicon-file"></span>
+        <%= object.name %>
+      </td>
+      <td><%= object.bucket_id %></td>
+      <td><%= object.sha1 %></td>
+      <td><%= object.size %></td>
+      <!-- <td><%= object.location %></td> -->
+
+      <td><%= link_to 'Properties', forge_data_object_show_path(object.bucket_id, object.name) %>
+      </td>
+    </tr>
+  <% end %>
+</table>

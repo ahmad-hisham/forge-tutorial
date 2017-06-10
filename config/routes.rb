@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get '/forge/buckets/:bucket_id/objects',              to: 'forge_data_object#index',  as: 'forge_data_objects', constraints: { bucket_id: /.*/ }
+  get '/forge/buckets/:bucket_id/objects/:object_name', to: 'forge_data_object#show',   as: 'forge_data_object_show', constraints: { bucket_id: /.*/, object_name: /.*/ }
+  get '/forge/buckets/:bucket_id/upload',               to: 'forge_data_object#upload', as: 'forge_data_object_upload', constraints: { bucket_id: /.*/ }
+
   get  '/forge/buckets/',    to: 'forge_data_bucket#index', as: 'forge_data_buckets'
   get  '/forge/buckets/:id', to: 'forge_data_bucket#show',  as: 'forge_data_bucket_show', constraints: { id: /.*/ }
   post '/forge/buckets/new', to: 'forge_data_bucket#new',   as: 'forge_data_bucket_new'

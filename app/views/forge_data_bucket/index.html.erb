@@ -23,8 +23,7 @@
     <tr>
       <td>
         <span class="glyphicon glyphicon-inbox"></span>
-        <%= bucket.id %>
-        <%# link_to bucket.id, forge_data_objects_path(bucket.id) %>
+        <%= link_to bucket.id, forge_data_objects_path(bucket.id) %>
       </td>
       <td><%= bucket.created_date.strftime("%F") %></td>
       <td><%= bucket.policy_key %></td>
