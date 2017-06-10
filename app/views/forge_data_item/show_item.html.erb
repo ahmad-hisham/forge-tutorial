@@ -29,23 +29,27 @@
   <li>mime_type: <%= @item.mime_type %></li>
   <li>file_type: <%= @item.file_type %></li>
   <li>storage_size: <%= number_to_human_size @item.storage_size %></li>
-  <!-- <li>derivatives_link: <%= @item.derivatives_link %></li> -->
-  <!-- <li>thumbnails_link: <%= @item.thumbnails_link %></li> -->
-  <!-- <li>content_link: <%= @item.content_link %></li> -->
-  <!-- <li>content_urn: <%= @item.content_link %></li> -->
+  <li>derivatives_link: <%= @item.derivatives_link %></li>
+  <li>thumbnails_link: <%= @item.thumbnails_link %></li>
+  <li>content_link: <%= @item.content_link %></li>
+  <li>content_urn: <%= @item.content_urn %></li>
 
 </ul>
 
 <div><img data-thumbnail/><div/>
-
+<p> </p>
 <div>
-  <a class="btn btn-primary" href="#" data-download-content>
+  <a class="btn btn-default" href="#" data-download-content>
     <span class="glyphicon glyphicon-save-file"></span>
     Download
   </a>
   <%= link_to forge_derivative_translate_path(@item.project_id, @item.id), class: "btn btn-default", type: "button" do %>
     <span class="glyphicon glyphicon-transfer"></span>
     Translate
+  <% end %>  
+  <%= link_to forge_viewer_view_path(@item.project_id, @item.id), target: :_blank, class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-blackboard"></span>
+    View
   <% end %>  
 </div>
 

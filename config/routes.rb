@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/forge/projects/:project_id/items/:item_id/view', to: 'forge_viewer#view', as: 'forge_viewer_view', constraints: { project_id: /.*/ , item_id: /.*/ }
+
   get '/forge/projects/:project_id/items/:item_id/translate',          to: 'forge_derivative#translate',          as: 'forge_derivative_translate', constraints: { project_id: /.*/ , item_id: /.*/ }
   get '/forge/projects/:project_id/items/:item_id/translate_start',    to: 'forge_derivative#translate_start',    as: 'forge_derivative_translate_start',    defaults: {format: :json}, constraints: { project_id: /.*/ , item_id: /.*/ }
   get '/forge/projects/:project_id/items/:item_id/translate_progress', to: 'forge_derivative#translate_progress', as: 'forge_derivative_translate_progress', defaults: {format: :json}, constraints: { project_id: /.*/ , item_id: /.*/ }
