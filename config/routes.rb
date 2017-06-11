@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   # Forge Model Viewer
-  get '/forge/projects/:project_id/items/:item_id/view', to: 'forge_viewer#view', as: 'forge_viewer_view', constraints: { project_id: /.*/ , item_id: /.*/ }
+  get '/forge/projects/:project_id/items/:item_id/view',     to: 'forge_viewer#view',        as: 'forge_viewer_view', constraints: { project_id: /.*/ , item_id: /.*/ }
+  get '/forge/buckets/:bucket_id/objects/:object_name/view', to: 'forge_viewer#view_object', as: 'forge_viewer_view_object', constraints: { bucket_id: /.*/, object_name: /.*/ }
 
   # Forge Model Derivative
   get '/forge/projects/:project_id/items/:item_id/translate',          to: 'forge_derivative#translate',          as: 'forge_derivative_translate', constraints: { project_id: /.*/ , item_id: /.*/ }

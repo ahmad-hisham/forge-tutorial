@@ -24,4 +24,13 @@ class ForgeViewer
     # Return viewer url
     "/viewer.html?token=#{read_only_access_token}&urn=#{base64_urn}"
   end
+
+  # Construct the url of the viewer
+  def self.get_viewer_link_from_object(access_token, object_id)
+    # Encode urn in Base64, strip padding
+    base64_urn = Base64.strict_encode64(object_id).delete("=")
+
+    # Return viewer url
+    "/viewer.html?token=#{access_token}&urn=#{base64_urn}"
+  end
 end

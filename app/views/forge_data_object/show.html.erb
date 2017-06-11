@@ -1,4 +1,4 @@
-<h1>Browse Forge Bucket <%= @object.id %></h1>
+<h1>Browse Forge Object <%= @object.name %></h1>
 
 <%= render partial: "flash_info" %>
 
@@ -7,7 +7,7 @@
   <li>name: <%= @object.name %></li>
   <li>bucket_id: <%= @object.bucket_id %></li>
   <li>sha1: <%= @object.sha1 %></li>
-  <li>size: <%= @object.size %></li>
+  <li>size: <%= number_to_human_size @object.size %></li>
   <li>location: <%= @object.location %></li>
 </ul>
 
@@ -24,8 +24,8 @@
     <span class="glyphicon glyphicon-transfer"></span>
     Translate
   <% end %>  
-  <!-- < %= link_to forge_viewer_view_path(@object.id), target: :_blank, class: "btn btn-default", type: "button" do %>
+  <%= link_to forge_viewer_view_object_path(@object.bucket_id, @object.name), target: :_blank, class: "btn btn-default", type: "button" do %>
     <span class="glyphicon glyphicon-blackboard"></span>
     View
-  < % end %> -->
+  <% end %>
 </div>
