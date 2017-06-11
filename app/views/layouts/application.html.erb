@@ -29,12 +29,12 @@
               <span class="icon-bar"></span>
             </button>
             <%= image_tag "forge_logo_2line.png", alt: "Autodesk Forge Samples", class: "navbar-brand" %>
-          </div>
+          </div><!--/.navbar-header -->
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/upload_sample/run">Upload sample</a></li>
-              <li><a href="/forge/login">Browse user data</a></li>
-              <li><a href="/forge/login_app">Browse app data</a></li>
+              <li><%= link_to "Upload sample", upload_sample_run_path %></li>
+              <li><%= link_to "Browse user data", forge_login_path %></li>
+              <li><%= link_to "Browse app data", forge_login_app_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -42,7 +42,7 @@
 
       <div id="body-container">
         <%= yield %>
-      </div>
+      </div><!--/.body-container -->
 
     </div>
   </body>
