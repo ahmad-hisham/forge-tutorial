@@ -10,34 +10,32 @@
 
 <%= render partial: "flash_info" %>
 
-<ul>
-  <li>id: <%= @item.id %></li>
-  <li>name: <%= @item.name %></li>
-  <li>type: <%= @item.type %></li>
-  <li>project_id: <%= @item.project_id %></li>
-  <li>create_time: <%= @item.create_time %></li>
-  <li>create_user_id: <%= @item.create_user_id %></li>
-  <li>create_user_name: <%= @item.create_user_name %></li>
-  <li>last_modified_time: <%= @item.last_modified_time %></li>
-  <li>last_modified_user_id: <%= @item.last_modified_user_id %></li>
-  <li>last_modified_user_name: <%= @item.last_modified_user_name %></li>
-  <li>object_count: <%= @item.object_count %></li>
-  <li>hidden: <%= @item.hidden %></li>
+<table class="table">
+  <tr><td>id:</td><td><%= @item.id %></td></tr>
+  <tr><td>name:</td><td><%= @item.name %></td></tr>
+  <tr><td>type:</td><td><%= @item.type %></td></tr>
+  <tr><td>project_id:</td><td><%= @item.project_id %></td></tr>
+  <tr><td>create_time:</td><td><%= @item.create_time %></td></tr>
+  <tr><td>create_user_id:</td><td><%= @item.create_user_id %></td></tr>
+  <tr><td>create_user_name:</td><td><%= @item.create_user_name %></td></tr>
+  <tr><td>last_modified_time:</td><td><%= @item.last_modified_time %></td></tr>
+  <tr><td>last_modified_user_id:</td><td><%= @item.last_modified_user_id %></td></tr>
+  <tr><td>last_modified_user_name:</td><td><%= @item.last_modified_user_name %></td></tr>
+  <tr><td>object_count:</td><td><%= @item.object_count %></td></tr>
+  <tr><td>hidden:</td><td><%= @item.hidden %></td></tr>
 
-  <li>name_internal: <%= @item.name_internal %></li>
-  <li>version_number: <%= @item.version_number %></li>
-  <li>mime_type: <%= @item.mime_type %></li>
-  <li>file_type: <%= @item.file_type %></li>
-  <li>storage_size: <%= number_to_human_size @item.storage_size %></li>
-  <li>derivatives_link: <%= @item.derivatives_link %></li>
-  <li>thumbnails_link: <%= @item.thumbnails_link %></li>
-  <li>content_link: <%= @item.content_link %></li>
-  <li>content_urn: <%= @item.content_urn %></li>
+  <tr><td>name_internal:</td><td><%= @item.name_internal %></td></tr>
+  <tr><td>version_number:</td><td><%= @item.version_number %></td></tr>
+  <tr><td>mime_type:</td><td><%= @item.mime_type %></td></tr>
+  <tr><td>file_type:</td><td><%= @item.file_type %></td></tr>
+  <tr><td>storage_size:</td><td><%= number_to_human_size @item.storage_size %></td></tr>
+  <tr><td>derivatives_link:</td><td><%= @item.derivatives_link %></td></tr>
+  <tr><td>thumbnails_link:</td><td><%= @item.thumbnails_link %></td></tr>
+  <tr><td>content_link:</td><td><%= @item.content_link %></td></tr>
+  <tr><td>content_urn:</td><td><%= @item.content_urn %></td></tr>
+  <tr><td>thumbnail:</td><td><img data-thumbnail/></td></tr>
+</table>
 
-</ul>
-
-<div><img data-thumbnail/><div/>
-<p> </p>
 <div>
   <%= link_to :back, class: "btn btn-default", type: "button" do %>
     <span class="glyphicon glyphicon-arrow-left"></span>

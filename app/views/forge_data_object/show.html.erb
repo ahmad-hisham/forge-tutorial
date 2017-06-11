@@ -2,14 +2,14 @@
 
 <%= render partial: "flash_info" %>
 
-<ul>
-  <li>id: <%= @object.id %></li>
-  <li>name: <%= @object.name %></li>
-  <li>bucket_id: <%= @object.bucket_id %></li>
-  <li>sha1: <%= @object.sha1 %></li>
-  <li>size: <%= number_to_human_size @object.size %></li>
-  <li>location: <%= @object.location %></li>
-</ul>
+<table class="table">
+  <tr><td>id:</td><td><%= @object.id %></td></tr>
+  <tr><td>name:</td><td><%= @object.name %></td></tr>
+  <tr><td>bucket_id:</td><td><%= @object.bucket_id %></td></tr>
+  <tr><td>sha1:</td><td><%= @object.sha1 %></td></tr>
+  <tr><td>size:</td><td><%= number_to_human_size @object.size %></td></tr>
+  <tr><td>location:</td><td><%= @object.location %></td></tr>
+</table>
 
 <div>
   <%= link_to forge_data_objects_path(@object.bucket_id), class: "btn btn-default", type: "button" do %>

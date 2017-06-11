@@ -1,10 +1,10 @@
 <h1>Browse Forge Hub <%= @hub.name %></h1>
 
-<ul>
-  <li>id: <%= @hub.id %></li>
-  <li>name: <%= @hub.name %></li>
-  <li>type: <%= @hub.type %></li>
-</ul>
+<table class="table">
+  <tr><td>id:</td><td><%= @hub.id %></td></tr>
+  <tr><td>name:</td><td><%= @hub.name %></td></tr>
+  <tr><td>type:</td><td><%= @hub.type %></td></tr>
+</table>
 
 <%= link_to forge_data_hubs_path, class: "btn btn-default", type: "button" do %>
   <span class="glyphicon glyphicon-arrow-left"></span>

@@ -1,11 +1,11 @@
 <h1>Browse Forge Project <%= @project.name %></h1>
 
-<ul>
-  <li>id: <%= @project.id %></li>
-  <li>name: <%= @project.name %></li>
-  <li>type: <%= @project.type %></li>
-  <li>hub_id: <%= @project.hub_id %></li>
-</ul>
+<table class="table">
+  <tr><td>id:</td><td><%= @project.id %></td></tr>
+  <tr><td>name:</td><td><%= @project.name %></td></tr>
+  <tr><td>type:</td><td><%= @project.type %></td></tr>
+  <tr><td>hub_id:</td><td><%= @project.hub_id %></td></tr>
+</table>
 
 <%= link_to forge_data_projects_path(@project.hub_id), class: "btn btn-default", type: "button" do %>
   <span class="glyphicon glyphicon-arrow-left"></span>
