@@ -11,7 +11,7 @@ class ForgeDerivativeController < ApplicationController
     # Detect progress until finished
     is_complete = false
     while(!is_complete)
-      result = ForgeDerivative.verify_job_complete(access_token, params[:project_id], params[:item_id])
+      result = ForgeDerivative.get_job_progress(access_token, params[:project_id], params[:item_id])
       p result
       case result["status"]
       when "pending", "inprogress"
@@ -34,15 +34,15 @@ class ForgeDerivativeController < ApplicationController
     access_token = session[:app_access_token]
 
     # Construct object_id from passed parameters
-    #object_id = "urn:adsk.objects:os.object:#{params[:bucket_id]}/#{params[:object_name]}"
+    object_id = params[:object_id] || "urn:adsk.objects:os.object:#{params[:bucket_id]}/#{params[:object_name]}"
 
     # Initiate translate job
-    ForgeDerivative.translate_item(access_token, params[:object_id])
+    ForgeDerivative.translate_object(access_token, object_id)
 
     # Detect progress until finished
     is_complete = false
     while(!is_complete)
-      result = ForgeDerivative.verify_job_complete(access_token, params[:object_id])
+      result = ForgeDerivative.get_job_progress_from_urn(access_token, object_id)
       p result
       case result["status"]
       when "pending", "inprogress"
