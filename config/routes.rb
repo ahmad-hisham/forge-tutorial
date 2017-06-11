@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/forge/buckets/:bucket_id/objects/:object_name/translate',      to: 'forge_derivative#translate_object',   as: 'forge_derivative_translate_object', constraints: { bucket_id: /.*/, object_name: /.*/ }
+
   get '/forge/buckets/:bucket_id/objects',              to: 'forge_data_object#index',  as: 'forge_data_objects', constraints: { bucket_id: /.*/ }
   get '/forge/buckets/:bucket_id/objects/:object_name', to: 'forge_data_object#show',   as: 'forge_data_object_show', constraints: { bucket_id: /.*/, object_name: /.*/ }
   get '/forge/buckets/:bucket_id/upload',               to: 'forge_data_object#upload', as: 'forge_data_object_upload', constraints: { bucket_id: /.*/ }

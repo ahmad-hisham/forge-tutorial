@@ -1,5 +1,7 @@
 <h1>Browse Forge Bucket <%= @object.id %></h1>
 
+<%= render partial: "flash_info" %>
+
 <ul>
   <li>id: <%= @object.id %></li>
   <li>name: <%= @object.name %></li>
@@ -9,4 +11,21 @@
   <li>location: <%= @object.location %></li>
 </ul>
 
-<%= link_to 'Back to Objects', forge_data_objects_path(@object.bucket_id) %></td>
+<div>
+  <%= link_to forge_data_objects_path(@object.bucket_id), class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    Back
+  <% end %>  
+  <!-- <a class="btn btn-default" href="#" data-download-content-object>
+    <span class="glyphicon glyphicon-save-file"></span>
+    Download
+  </a> -->
+  <%= link_to forge_derivative_translate_object_path(bucket_id: @object.bucket_id, object_name: @object.name, object_id: @object.id), class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-transfer"></span>
+    Translate
+  <% end %>  
+  <!-- < %= link_to forge_viewer_view_path(@object.id), target: :_blank, class: "btn btn-default", type: "button" do %>
+    <span class="glyphicon glyphicon-blackboard"></span>
+    View
+  < % end %> -->
+</div>
