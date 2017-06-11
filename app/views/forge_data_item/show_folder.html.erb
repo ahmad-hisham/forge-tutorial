@@ -14,4 +14,8 @@
   <li>object_count: <%= @item.object_count %></li>
   <li>hidden: <%= @item.hidden %></li>
 </ul>
-</div>
+
+<%= link_to :back, class: "btn btn-default", type: "button" do %>
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  Back
+<% end %>  

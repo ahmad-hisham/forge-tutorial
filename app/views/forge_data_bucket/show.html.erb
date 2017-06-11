@@ -6,4 +6,7 @@
   <li>policy_key: <%= @bucket.policy_key %></li>
 </ul>
 
-<%= link_to 'Back to Buckets', forge_data_buckets_path %></td>
+<%= link_to forge_data_buckets_path, class: "btn btn-default", type: "button" do %>
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  Back
+<% end %>  

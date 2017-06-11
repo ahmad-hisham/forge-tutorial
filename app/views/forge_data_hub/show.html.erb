@@ -6,4 +6,7 @@
   <li>type: <%= @hub.type %></li>
 </ul>
 
-<%= link_to 'Back to Hubs', forge_data_hubs_path %></td>
+<%= link_to forge_data_hubs_path, class: "btn btn-default", type: "button" do %>
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  Back
+<% end %>  
