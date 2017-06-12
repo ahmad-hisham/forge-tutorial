@@ -1,6 +1,6 @@
 # Autodesk Forge Samples (Ruby on Rails)
 
-[![Ruby](https://img.shields.io/badge/ruby-2.3.0-blue.svg)](https://www.ruby-lang.org/en/)
+[![Ruby](https://img.shields.io/badge/ruby-2.4.0-blue.svg)](https://www.ruby-lang.org/en/)
 [![Rails](https://img.shields.io/badge/rails-5.1.1-blue.svg)](http://rubyonrails.org/)
 [![jQuery](https://img.shields.io/badge/jquery-1.12.4-blue.svg)](https://jquery.com/)
 [![Bootstrap](https://img.shields.io/badge/bootstrap-3.3.7-blue.svg)](http://getbootstrap.com/)
@@ -39,7 +39,7 @@ The second sample focuses on 3-legged [OAuth](https://developer.autodesk.com/en/
 * Show files in the Viewer
 
 ### Requirements
-The app is based on Rails 5.1.1, Ruby 2.3.0, jQuery 1.12.4 and Bootstrap 3.3.7 
+The app is based on Rails 5.1.1, Ruby 2.4.0, jQuery 1.12.4 and Bootstrap 3.3.7, 
 no compatability checks have been made on earlier releases.
 
 ### Installation

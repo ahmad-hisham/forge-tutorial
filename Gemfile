@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.4.0'
 
 ENV['RUBY_DEP_GEM_SILENCE_WARNINGS'] = '1'
 
