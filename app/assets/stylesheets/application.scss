@@ -34,7 +34,7 @@ body {
 }
 
 #login.jumbotron {
-  background-image: url(<%= asset_path 'forge_bg.png' %>);
+  background-image: image-url('forge_bg.png');
 }
 
 #login.jumbotron h1 {
