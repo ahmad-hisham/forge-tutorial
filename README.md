@@ -15,7 +15,12 @@
 This app provides multiple samples on using the Autodesk Forge Web Services APIs:
 
 ### Sample 1
-The first sample demonstrates how to use the [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/), [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/) and [Model Derivative](https://developer.autodesk.com/en/docs/model-derivative/v2/overview/) Forge APIs, as well as the Forge [Viewer](https://developer.autodesk.com/en/docs/viewer/v2/overview/) JavaScript library. It shows the following typical workflow:
+The first sample demonstrates how to use the [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/),
+ [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/)
+ and [Model Derivative](https://developer.autodesk.com/en/docs/model-derivative/v2/overview/) Forge APIs,
+ as well as the [Forge Viewer](https://developer.autodesk.com/en/docs/viewer/v2/overview/) JavaScript library in Automated mode.
+
+It shows the following workflow:
 
 * Create a 2-legged authentication token
 * Create a bucket (an arbitrary space to store objects)
@@ -26,7 +31,10 @@ The first sample demonstrates how to use the [OAuth](https://developer.autodesk.
 It is based on the [forge-ruby-sample-app](https://github.com/Autodesk-Forge/forge-ruby-sample-app) but runs as a Rails App
 
 ### Sample 2
-The second sample focuses on 3-legged [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/) authentication and [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/). It:
+The second sample focuses on 3-legged [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/) authentication
+ and [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/).
+ 
+It:
 
 * Generate 3-legged authentication token from user authorization
 * Explore user hubs from different Autodesk services
@@ -37,6 +45,23 @@ The second sample focuses on 3-legged [OAuth](https://developer.autodesk.com/en/
 * Upload a file to project folder
 * Prepare the file for displaying in the Viewer (translate the file into SVF format)
 * Show files in the Viewer
+
+### Sample 3
+The third sample is similar to the first sample, but in an Interactive way,
+ it demonstrates how to use the 2-legged [OAuth](https://developer.autodesk.com/en/docs/oauth/v2/overview/),
+ [Data Management](https://developer.autodesk.com/en/docs/data/v2/overview/)
+ and [Model Derivative](https://developer.autodesk.com/en/docs/model-derivative/v2/overview/) Forge APIs,
+ as well as the [Forge Viewer](https://developer.autodesk.com/en/docs/viewer/v2/overview/) JavaScript library.
+
+It:
+
+* Create a 2-legged authentication token
+* Explore App-owned buckets
+* Create a bucket
+* Display all objects (files) inside a bucket with their properties and links
+* Upload a sample file to the bucket (not user-defined for security reasons)
+* Prepare the file for displaying in the Viewer (translate the file into SVF format)
+* Show the translated file in the Viewer
 
 ### Requirements
 The app is based on Rails 5.1.1, Ruby 2.4.0, jQuery 1.12.4 and Bootstrap 3.3.7, 
