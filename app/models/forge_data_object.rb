@@ -24,8 +24,9 @@ class ForgeDataObject
     response = RestClient.put("#{API_URL}/oss/v2/buckets/#{bucket_id}/objects/#{object_name}",
                                file_uploaded,
                                { Authorization: "Bearer #{access_token}", content_type:'application/octet-stream'})
-    return response
-    #self.from_json(response)
+
+    response_json = JSON.parse(response.body)
+    self.from_json(response_json)
   end
 
   def self.from_json(object)

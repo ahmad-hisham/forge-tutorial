@@ -1,0 +1,17 @@
+<h1>Viewer Samples</h1>
+
+<%= render partial: "flash_info" %>
+
+<div class="list-group">
+  <%= link_to viewer_sample_run_path, class: "list-group-item", type: "button" do %>
+    <span class="glyphicon glyphicon-cloud-upload"></span>
+    Upload sample DWG
+  <% end %>
+  <br/>
+  <% if @uploaded_object != nil %>
+    <%= link_to forge_viewer_view_object_path(@uploaded_object.bucket_id, @uploaded_object.name), target: :_blank, class: "list-group-item", type: "button" do %>
+      <span class="glyphicon glyphicon-blackboard"></span>
+      View
+    <% end %>
+  <% end %>
+</div>

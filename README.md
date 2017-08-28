@@ -63,9 +63,22 @@ It:
 * Prepare the file for displaying in the Viewer (translate the file into SVF format)
 * Show the translated file in the Viewer
 
+### Sample 4
+The forth sample focuses on the [Forge Viewer](https://developer.autodesk.com/en/docs/viewer/v2/overview/),
+ it demonstrates the capabilities of the Forge Viewer client-side functionality
+ and how the Viewer can manipulate the translated design files to extract
+ and display various info about the displayed model and sheets.
+
+On the server-side, it is very similar to Sample 1, but uses the functions already implemented in Samples 2 and 3 instead
+ to minimize code duplication and better reuse.
+It's role is to upload a sample 2D DWG file (in addition to the already uploaded 3D OBJ file) to an App Bucket
+ and initiate translation service (Model derivative) to generate SVF files for it.
+
+On the client side we start with the basic Viewer functionality then move to more advanced samples.
+
 ### Requirements
 The app is based on Rails 5.1.1, Ruby 2.4.0, jQuery 1.12.4 and Bootstrap 3.3.7, 
-no compatability checks have been made on earlier releases.
+no compatibility checks have been made on earlier releases.
 
 ### Installation
 ```$ bundle install ```

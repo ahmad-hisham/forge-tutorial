@@ -44,6 +44,10 @@ Rails.application.routes.draw do
   get '/forge/login/callback', to: 'forge_auth#callback',  as: 'forge_login_callback'
   get '/forge/login_app',      to: 'forge_auth#login_app', as: 'forge_login_app'
 
+  # Upload DWG for Viewer Samples
+  get 'viewer_sample',    to: 'viewer_sample#index', as: 'viewer_sample'
+  get 'viewer_sample/run'
+
   # Simple Upload Sample
   get 'upload_sample/run'
 
