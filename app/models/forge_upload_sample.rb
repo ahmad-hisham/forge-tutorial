@@ -111,22 +111,17 @@ class ForgeUploadSample
   
   # Poll the status of the job until it's done
   def verify_job_complete(base_64_urn,access_token)
-    is_complete = false
+    Timeout::timeout(120) do # 2 min
+      loop do
+        response = RestClient.get("#{API_URL}/modelderivative/v2/designdata/#{base_64_urn}/manifest",
+                                  { Authorization: "Bearer #{access_token}"} )
+        json = JSON.parse(response.body)
+        p "Translate file to SVF - status: #{json['status']}, progress: #{json['progress']}"
   
-    while(!is_complete)
-      response = RestClient.get("#{API_URL}/modelderivative/v2/designdata/#{base_64_urn}/manifest",
-                                { Authorization: "Bearer #{access_token}"} )
-      json = JSON.parse(response.body)
-      if(json["progress"]=="complete")
-        is_complete = true
-        p "Finished translating your file to SVF - status: #{json['status']}, progress: #{json['progress']} "
-      else
-        p "Haven't finished translating your file to SVF - status: #{json['status']}, progress: #{json['progress']} "
+        return response if json["progress"]=="complete"
         sleep 1
       end
     end
-  
-    return response
   end
   
   # Puts the url of the viewer for the user to open.
