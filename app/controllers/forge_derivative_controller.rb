@@ -6,20 +6,16 @@ class ForgeDerivativeController < ApplicationController
     access_token = session[:user_access_token]
 
     # Initiate translate job
-    ForgeDerivative.translate_item(access_token, params[:project_id], params[:item_id])
+    result = ForgeDerivative.translate_item(access_token, params[:project_id], params[:item_id])
 
     # Detect progress until finished
-    is_complete = false
-    while(!is_complete)
-      result = ForgeDerivative.get_job_progress(access_token, params[:project_id], params[:item_id])
-      p result
-      case result["status"]
-      when "pending", "inprogress"
-        # "Haven't finished translating file - status: #{result[:status]}, progress: #{result[:progress]}"
-        sleep 1
-      when "success", "failed", "timeout"
-        # "Finished translating file - status: #{result[:status]}, progress: #{result[:progress]}"
-        is_complete = true
+    Timeout::timeout(120) do # 2 min
+      loop do
+        result = ForgeDerivative.get_job_progress(access_token, params[:project_id], params[:item_id])
+        p "Translate file to SVF - status: #{result['status']}, progress: #{result['progress']}"
+  
+        break if result["progress"] == "complete" or ["success", "failed", "timeout"].include? result["status"]
+        sleep 1 # if ["pending", "inprogress"].include? result["status"]
       end
     end
 
@@ -37,18 +33,16 @@ class ForgeDerivativeController < ApplicationController
     object_id = params[:object_id] || "urn:adsk.objects:os.object:#{params[:bucket_id]}/#{params[:object_name]}"
 
     # Initiate translate job
-    ForgeDerivative.translate_object(access_token, object_id)
+    result = ForgeDerivative.translate_object(access_token, object_id)
 
     # Detect progress until finished
-    is_complete = false
-    while(!is_complete)
-      result = ForgeDerivative.get_job_progress_from_urn(access_token, object_id)
-      p result
-      case result["status"]
-      when "pending", "inprogress"
-        sleep 1
-      when "success", "failed", "timeout"
-        is_complete = true
+    Timeout::timeout(120) do # 2 min
+      loop do
+        result = ForgeDerivative.get_job_progress_from_urn(access_token, object_id)
+        p "Translate file to SVF - status: #{result['status']}, progress: #{result['progress']}"
+  
+        break if result["progress"] == "complete" or ["success", "failed", "timeout"].include? result["status"]
+        sleep 1 # if ["pending", "inprogress"].include? result["status"]
       end
     end
 
