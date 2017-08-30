@@ -1,7 +1,7 @@
 class ForgeDataItemController < ApplicationController
   def index
     # Restore access_token from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Retrieve list of items
     @items = ForgeDataItem.get_items(access_token, params[:project_id], params[:folder_id])
@@ -10,7 +10,7 @@ class ForgeDataItemController < ApplicationController
 
   def show_folder
     # Restore from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Get item by id
     @item = ForgeDataItem.get_folder(access_token, params[:project_id], params[:folder_id])
@@ -19,7 +19,7 @@ class ForgeDataItemController < ApplicationController
 
   def show_item
     # Restore from session
-    @access_token = session[:user_access_token]
+    @access_token = helpers.forge_get_user_access_token()
 
     # Get item by id
     @item = ForgeDataItem.get_item(@access_token, params[:project_id], params[:item_id])
@@ -28,7 +28,7 @@ class ForgeDataItemController < ApplicationController
 
   def upload
     # Restore from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Receive uploaded file and save to temporary location
     uploaded_io = params[:uploaded_file]
@@ -50,7 +50,7 @@ class ForgeDataItemController < ApplicationController
 
   def new_folder
     # Restore from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Create new folder in selected folder
     @item = ForgeDataItem.new_folder(access_token, params[:project_id], params[:folder_id], params[:subfolder_name])

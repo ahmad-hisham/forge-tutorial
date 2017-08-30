@@ -3,7 +3,7 @@ class ForgeDerivativeController < ApplicationController
 
   def translate
     # Restore from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Initiate translate job
     result = ForgeDerivative.translate_item(access_token, params[:project_id], params[:item_id])
@@ -27,7 +27,7 @@ class ForgeDerivativeController < ApplicationController
 
   def translate_object
     # Restore from session
-    access_token = session[:app_access_token]
+    access_token = helpers.forge_get_app_access_token()
 
     # Construct object_id from passed parameters
     object_id = params[:object_id] || "urn:adsk.objects:os.object:#{params[:bucket_id]}/#{params[:object_name]}"
@@ -54,7 +54,7 @@ class ForgeDerivativeController < ApplicationController
 
   def translate_start
     # Restore from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Initiate translate job
     @result = ForgeDerivative.translate_item(access_token, params[:project_id], params[:item_id])
@@ -63,7 +63,7 @@ class ForgeDerivativeController < ApplicationController
 
   def translate_progress
     # Restore from session
-    access_token = session[:user_access_token]
+    access_token = helpers.forge_get_user_access_token()
 
     # Initiate translate job
     @result = ForgeDerivative.verify_job_complete(access_token, params[:project_id], params[:item_id])

@@ -1,7 +1,7 @@
 class ForgeDataObjectController < ApplicationController
   def index
     # Restore access_token from session
-    app_access_token = session[:app_access_token]
+    app_access_token = helpers.forge_get_app_access_token()
 
     # Retrieve list of Objects
     @objects = ForgeDataObject.get_objects(app_access_token, params[:bucket_id])
@@ -10,7 +10,7 @@ class ForgeDataObjectController < ApplicationController
 
   def show
     # Restore access_token from session
-    app_access_token = session[:app_access_token]
+    app_access_token = helpers.forge_get_app_access_token()
 
     # Get Object by id
     @object = ForgeDataObject.get_object(app_access_token, params[:bucket_id], params[:object_name])
@@ -19,7 +19,7 @@ class ForgeDataObjectController < ApplicationController
 
   def upload
     # Restore access_token from session
-    app_access_token = session[:app_access_token]
+    app_access_token = helpers.forge_get_app_access_token()
 
     # Upload sample object
     # NOTE: Fixed file to minimize OSS access abuse

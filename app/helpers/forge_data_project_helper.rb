@@ -1,2 +1,0 @@
-module ForgeDataProjectHelper
-end

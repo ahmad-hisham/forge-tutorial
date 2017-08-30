@@ -16,8 +16,8 @@ class ForgeAuthController < ApplicationController
     access_token, refresh_token = ForgeAuth.get_access_token_from_oauth_code(callback_code,callback_url)
 
     # Save to session
-    session[:user_access_token] = access_token
-    session[:user_refresh_token] = refresh_token
+    helpers.forge_set_user_access_token(access_token)
+    helpers.forge_set_user_refresh_token(refresh_token)
   
     # Redirect to next page
     redirect_to forge_data_hubs_path
@@ -25,7 +25,7 @@ class ForgeAuthController < ApplicationController
 
   def login_app
     app_access_token = ForgeAuth.get_app_access_token
-    session[:app_access_token] = app_access_token
+    helpers.forge_set_app_access_token(app_access_token)
   
     # Redirect to next page
     redirect_to forge_data_buckets_path

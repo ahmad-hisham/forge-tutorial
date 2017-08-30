@@ -1,7 +1,7 @@
 class ViewerSampleController < ApplicationController
   def index
     app_access_token = ForgeAuth.get_app_access_token
-    session[:app_access_token] = app_access_token
+    helpers.forge_set_app_access_token(app_access_token)
 
     @uploaded_object = ForgeViewerSample.get_sample_object
   end
