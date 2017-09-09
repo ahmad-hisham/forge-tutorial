@@ -5,6 +5,9 @@
     <!-- The Viewer CSS -->
     <link rel="stylesheet" href="https://developer.api.autodesk.com/viewingservice/v1/viewers/style.min.css" type="text/css">
 
+    <!-- jQuery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Developer CSS -->
     <style>
         body {
@@ -16,18 +19,27 @@
             margin: 0;
             background-color: #F0F8FF;
         }
+        #MyViewablesList {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
 
+<!-- Viewables List -->
+<div id="MyViewablesList"></div>
+
 <!-- The Viewer will be instantiated here -->
 <div id="MyViewerDiv"></div>
+
 
 <!-- The Viewer JS -->
 <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/three.min.js"></script>
 <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js"></script>
 
+<!-- Developer JS -->
 <script>
+	//--- Small helper function
 	function getParameterByName(name, url) {
 		if (!url) {
 			url = window.location.href;
@@ -39,45 +51,110 @@
 		if (!results[2]) return '';
 		return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
-</script>
-<!-- Developer JS -->
-<script>
+
+	//--- Used for Cloud9 IDE
+	/*global $*/
+	/*global Autodesk*/
+
+	//--- Initialize the viewer and load Viewer document
 	var viewer;
+	var viewerDoc;
+	var viewables;
+
 	var options = {
 		env: 'AutodeskProduction',
-		accessToken: getParameterByName('token')
+		//accessToken: getParameterByName('token'),
+		getAccessToken: function(onGetAccessToken) {
+	        // TODO: Replace static access token string below with call to fetch new token from your backend
+	        // Both values are provided by Forge's Authentication (OAuth) API.
+	        var accessToken = getParameterByName('token');
+	        var expireTimeSeconds = 86400;
+	        onGetAccessToken(accessToken, expireTimeSeconds);
+    	}
 	};
 	var documentId = 'urn:' + getParameterByName('urn');
 	Autodesk.Viewing.Initializer(options, function onInitialized(){
 		Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
 	});
+
 	/**
 	 * Autodesk.Viewing.Document.load() success callback.
 	 * Proceeds with model initialization.
 	 */
 	function onDocumentLoadSuccess(doc) {
 		// A document contains references to 3D and 2D viewables.
-		var viewables = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {'type':'geometry'}, true);
+		viewables = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {'type':'geometry'}, true);
 		if (viewables.length === 0) {
 			console.error('Document contains no viewables.');
 			return;
 		}
-		// Choose any of the available viewables
-		var initialViewable = viewables[0];
-		var svfUrl = doc.getViewablePath(initialViewable);
-		var modelOptions = {
-			sharedPropertyDbPath: doc.getPropertyDbPath()
-		};
-		var viewerDiv = document.getElementById('MyViewerDiv');
-		viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerDiv);
-		viewer.start(svfUrl, modelOptions, onLoadModelSuccess, onLoadModelError);
+
+		console.log(viewables);
+		// Load available viewables as a list of buttons above viewer
+		for (var i = 0; i < viewables.length; i++) {
+			var  viewable = viewables[i];
+
+			var viewableButton = $("<button>");
+			viewableButton.text("View " + viewable.name);
+			viewableButton.on('click', {viewable: i}, loadSpecificModel);
+			$("#MyViewablesList").append(viewableButton);
+		}
+
+	    // Create Viewer instance and load model.
+	    var viewerDiv = document.getElementById('MyViewerDiv');
+	    viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerDiv);  // Viewer ignores div dimensions here and create 100% div element anyway
+	    var viewerErrorCode = viewer.start();
+	
+	    // Check for initialization errors.
+	    if (viewerErrorCode) {
+	        console.error('viewer.start() error - errorCode:' + viewerErrorCode);
+	        showErrorDetails(viewerErrorCode);
+	        return;
+	    }
+
+	    viewerDoc = doc;
+
+	    // Everything is set up, load the model with the first available viewable
+	    loadModel(0);
 	}
+
+	/**
+	 * Attempts to load a specific model from the document.
+	 */
+	function loadSpecificModel(e) {
+		// Get viewable data from attached event data
+	    var viewableIndex = e.data.viewable;
+	    var viewable = viewables[viewableIndex];
+
+		if (viewable.progress != 'complete' || viewable.status != 'success' || viewable.type != 'geometry') {
+			alert("Viewable is not complete or failed to convert");
+			return;
+		}
+
+		// Reset the viewer, otherwise the 2 models will show in the same viewer
+	    viewer.tearDown();
+	    viewer.setUp(viewer.config);
+
+	    loadModel(viewableIndex);
+	}
+
+	function loadModel(viewableIndex) {
+	    var viewable = viewables[viewableIndex];
+	    var svfUrl = viewerDoc.getViewablePath(viewable);
+	    var modelOptions = {
+	        sharedPropertyDbPath: viewerDoc.getPropertyDbPath()
+	    };
+	    viewer.loadModel(svfUrl, modelOptions, onLoadModelSuccess, onLoadModelError);
+	}
+
 	/**
 	 * Autodesk.Viewing.Document.load() failuire callback.
 	 */
 	function onDocumentLoadFailure(viewerErrorCode) {
 		console.error('onDocumentLoadFailure() - errorCode:' + viewerErrorCode);
+		showErrorDetails(viewerErrorCode);
 	}
+
 	/**
 	 * viewer.loadModel() success callback.
 	 * Invoked after the model's SVF has been initially loaded.
@@ -88,12 +165,61 @@
 		console.log('Validate model loaded: ' + (viewer.model === model));
 		console.log(model);
 	}
+
 	/**
 	 * viewer.loadModel() failure callback.
 	 * Invoked when there's an error fetching the SVF file.
 	 */
 	function onLoadModelError(viewerErrorCode) {
 		console.error('onLoadModelError() - errorCode:' + viewerErrorCode);
+		showErrorDetails(viewerErrorCode);
+	}
+
+	function showErrorDetails(viewerErrorCode) {
+		switch(viewerErrorCode) {
+            case 1:
+                console.error('UNKNOWN_FAILURE: An unknown failure has occurred');
+                break;
+            case 2:
+                console.error('BAD_DATA: Bad data (corrupted or malformed) was encountered');
+                break;
+            case 3:
+                console.error('NETWORK_FAILURE: A network failure was encountered');
+                break;
+            case 4:
+                console.error('NETWORK_ACCESS_DENIED: Access was denied to a network resource (HTTP 403)');
+                break;
+            case 5:
+                console.error('NETWORK_FILE_NOT_FOUND: A network resource could not be found (HTTP 404)');
+                break;
+            case 6:
+                console.error('NETWORK_SERVER_ERROR: A server error was returned when accessing a network resource (HTTP 5xx)');
+                break;
+            case 7:
+                console.error('NETWORK_UNHANDLED_RESPONSE_CODE: An unhandled response code was returned when accessing a network resource (HTTP xxx)');
+                break;
+            case 8:
+                console.error('BROWSER_WEBGL_NOT_SUPPORTED: Browser error: webGL is not supported by the current browser');
+                break;
+            case 9:
+                console.error('BAD_DATA_NO_VIEWABLE_CONTENT: There is nothing viewable in the fetched document');
+                break;
+            case 10:
+                console.error('BROWSER_WEBGL_DISABLED: Browser error: webGL is supported, but not enabled');
+                break;
+            case 11:
+                console.error('BAD_DATA_MODEL_IS_EMPTY: There is no geomtry in loaded model');
+                break;
+            case 12:
+                console.error('RTC_ERROR: Collaboration server error');
+                break;
+            case 13:
+            	console.error('UNSUPORTED_FILE_EXTENSION: The extension of the loaded file is not supported');
+                break;
+            case 14:
+            	console.error('VIEWER_INTERNAL_ERROR: Viewer error: wrong or forbidden usage of the viewer');
+                break;
+		}
 	}
 </script>
 </body>
