@@ -2,6 +2,9 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no" />
   <meta charset="utf-8">
 
+  <!-- jQuery JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <!-- The Viewer CSS -->
   <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css" type="text/css">
 
@@ -20,12 +23,22 @@
 </head>
 <body>
 
+  <!-- Extension Buttons -->
+  <div id="MyViewerExtension"></div>
+
   <!-- The Viewer will be instantiated here -->
   <div id="MyViewerDiv"></div>
 
   <!-- The Viewer JS -->
   <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/three.min.js"></script>
   <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js"></script>
+
+  <!-- Extensions JS -->
+  <script src="viewer-extension-es6.js"></script>
+  <!--
+  <script src="viewer-extension.js"></script>
+  <script src="viewer-extension-es6.js"></script>
+  -->
 
   <!-- Developer JS -->
   <script>
@@ -61,8 +74,16 @@
     };
     var documentId = 'urn:' + getParameterByName('urn');
     Autodesk.Viewing.Initializer(options, function onInitialized(){
+
+      // Specify Extension
+      var config3d = {
+        extensions: [
+          'Autodesk.ADN.Viewing.Extension.MyViewerExtention'
+        ]
+      };
+
       viewerApp = new Autodesk.Viewing.ViewingApplication('MyViewerDiv');
-      viewerApp.registerViewer(viewerApp.k3D, Autodesk.Viewing.Private.GuiViewer3D);
+      viewerApp.registerViewer(viewerApp.k3D, Autodesk.Viewing.Private.GuiViewer3D, config3d);
       viewerApp.loadDocument(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
     });
 
