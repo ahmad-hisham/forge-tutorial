@@ -2,7 +2,7 @@ require 'base64'
 
 class ForgeViewer
   # Construct the url of the viewer
-  def self.get_viewer_link(access_token, project_id, item_id)
+  def self.get_viewer_link(access_token, project_id, item_id, viewer_id = 1)
     item = ForgeDataItem.get_item(access_token, project_id, item_id)
     # Encode urn in Base64, strip padding
     # BUG: Viewer doesn't recognize the urn if not uploaded from App and no prior translation job has been initiated
@@ -22,15 +22,15 @@ class ForgeViewer
     #end
 
     # Return viewer url
-    "/viewer.html?token=#{read_only_access_token}&urn=#{base64_urn}"
+    "/viewer#{viewer_id}.html?token=#{read_only_access_token}&urn=#{base64_urn}"
   end
 
   # Construct the url of the viewer
-  def self.get_viewer_link_from_object(access_token, object_id)
+  def self.get_viewer_link_from_object(access_token, object_id, viewer_id = 1)
     # Encode urn in Base64, strip padding
     base64_urn = Base64.strict_encode64(object_id).delete("=")
-
+    
     # Return viewer url
-    "/viewer.html?token=#{access_token}&urn=#{base64_urn}"
+    "/viewer#{viewer_id}.html?token=#{access_token}&urn=#{base64_urn}"
   end
 end

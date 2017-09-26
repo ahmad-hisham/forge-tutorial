@@ -127,7 +127,7 @@ class ForgeUploadSample
   # Puts the url of the viewer for the user to open.
   def get_viewer_link(urn,access_token)
     #absolute url = request.base_url
-    url = "/viewer.html?token=#{access_token}&urn=#{urn}"
+    url = "/viewer1.html?token=#{access_token}&urn=#{urn}"
     link = "<a href=\"#{url}\" target=\"_blank\">View Model</a>"
     return link
   end
