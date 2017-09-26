@@ -2,16 +2,24 @@
 
 <%= render partial: "flash_info" %>
 
-<div class="list-group">
-  <%= link_to viewer_sample_run_path, class: "list-group-item", type: "button" do %>
+<div class="row"><div class="col-sm-4">
+  <%= link_to viewer_sample_run_path, class: "btn btn-default btn-block", type: "button" do %>
     <span class="glyphicon glyphicon-cloud-upload"></span>
     Upload sample DWG
   <% end %>
   <br/>
   <% if @uploaded_object != nil %>
-    <%= link_to forge_viewer_view_object_path(@uploaded_object.bucket_id, @uploaded_object.name), target: :_blank, class: "list-group-item", type: "button" do %>
-      <span class="glyphicon glyphicon-blackboard"></span>
-      View
-    <% end %>
+    <div class="btn-group btn-block">
+      <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-blackboard"></span>
+        View
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% (1..3).each do |i| %>
+          <li><%= link_to "Use viewer # #{i}", forge_viewer_view_object_path(@uploaded_object.bucket_id, @uploaded_object.name, i), target: :_blank %></li>
+        <% end %>
+     </ul>
+    </div>
   <% end %>
-</div>
+</div></div>
